@@ -1,0 +1,54 @@
+#container{
+    display: flex;
+    flex-direction: column;
+    padding: 0 10% 0 10%;
+}
+
+.blockofprofile img{
+    width: 20%;
+    height: auto;
+    margin: 3%;
+    border-radius: 5px;
+}
+
+.blockofprofile img:hover{
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.blockofprofile{
+    background-color: #e2e3e5;
+    border-radius: 50px;
+    height: 400px;
+    overflow: auto;
+    margin-bottom: 20px;
+}
+.same{
+    display: flex;
+    flex-direction: column;
+    margin: 100px;
+}
+
+
+.link_upload_image {
+    display: inline-block;
+    align-self: flex-end;
+    width: 80px;
+    left: 5px;
+    text-align: center;
+    background-color: red;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.link_upload_image:hover{
+    color: white;
+    background-color: #E32636;
+}
+
+.blockofprofile::-webkit-scrollbar {
+    width: 0px;         /* ширина всей полосы прокрутки */
+}
+  

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'profile/css/style.css/' %}">
+{% endblock %}
+
+{% block main %}
+<div id="container">
+    <div id="myphotos" class="same">
+        <h2>
+            My photos
+        </h2>
+        <div class="myphotos blockofprofile">
+            {% for img in images %}
+                {% if user == img.author %}
+                    <img src="{{img.image.url}}" alt="something went wrong">
+                {% endif %}
+            {% endfor %}
+        </div>
+        <a class = "link_upload_image" href="{% url 'upload_image' %}">New post</a>
+    </div>
+
+    <div id="likedphotos" class="same">
+        <h2>
+            Liked
+        </h2>
+        <div class="likedphotos blockofprofile">
+            {% for liked_img in liked_images %}
+                <img src="{{liked_img.image.image.url}}" alt="something went wrong">
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

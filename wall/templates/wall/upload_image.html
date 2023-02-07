@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<form method="post" enctype="multipart/form-data" class="w-50 mx-auto">
+    {% csrf_token %}
+    <label for="1" class="form-label">
+        Upload image.
+    </label>
+    <input type="file" name="image" id="1" class="form-control mt-3">
+    <textarea class="form-control mt-3" rows="3" name="discription"></textarea>
+    <input type="submit" class="btn btn-primary mt-3">
+</form>
+
+{% endblock %}

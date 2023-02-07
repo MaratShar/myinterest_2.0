@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    {% if error_message %}
+        <p class="text-danger">{{error_message}}</p>
+    {% endif %}
+    <form action="" method="post" class="w-50 mx-auto">
+        {% csrf_token %}
+        <input type="text" placeholder="Input name" name="name" class="form-control mb-3">
+        <input type="password" placeholder="Input password" name="password_1" class="form-control mb-3">
+        <input type="password" placeholder="Repeat password" name="password_2" class="form-control mb-3">
+        <input type="submit" value="Register" class="btn btn-success">
+    </form>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'wall/css/wall.css/' %}">
+{% endblock %}
+
+{% block main %}
+    {% for img in images %}
+        <div class="post" style="background-image: url('{{img.image.url}}'); background-repeat: no-repeat;">
+            <div class="post-body">
+                <p class="post-text">{{img.discription}}</p>
+                {% if user.is_authenticated %}
+                    {% if img in likes %}
+                        <button class = "unlike" data-image = "{{img.id}}" onclick = "like(this)">
+                            <img src="{% static 'wall/img/chat-heart-fill.svg' %}" alt="chat-heart">
+                        </button>
+                    {% else %}
+                        <button class = "like" data-image = "{{img.id}}" onclick = "like(this)">
+                            <img src="{% static 'wall/img/chat-heart.svg' %}" alt="chat-heart">
+                        </button>
+                    {% endif %}
+                    <span class = "count-of-likes">{{img.likes}}</span>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block script %}
+
+<script>
+    async function like(button){
+        if (button.classList.contains("like")){
+            let response = await fetch("http://127.0.0.1:8000/wall/like/" + button.dataset.image);
+            console.log(await response.json());
+            button.innerHTML = `<img src="{% static 'wall/img/chat-heart-fill.svg' %}" alt="chat-heart">`;
+            button.classList.remove("like");
+            button.classList.add("unlike");
+            let span = document.querySelector(".count-of-likes");
+            let likes = parseInt(span.innerText);
+            span.innerText = likes + 1;
+        }
+        else if(button.classList.contains("unlike")){
+            let response = await fetch("http://127.0.0.1:8000/wall/unlike/" + button.dataset.image);
+            console.log(await response.json());
+            button.innerHTML = `<img src='{% static "wall/img/chat-heart.svg" %}' alt='chat-heart'>`;
+            button.classList.remove("unlike");
+            button.classList.add("like");
+            let span = document.querySelector(".count-of-likes");
+            let likes = parseInt(span.innerText);
+            span.innerText = likes - 1;
+        }
+    }
+</script>
+
+{% endblock %}
